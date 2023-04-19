@@ -27,5 +27,12 @@
                 "remember"
             ]
         }
-    }]
+    }],
+    "TIME_PATTERN": [{
+            "POS": "NUM"
+        },
+        {
+            "ENT_TYPE": { "IN": ["TIME", "DATE"] }
+        }
+    ]
 }

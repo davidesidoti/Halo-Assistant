@@ -1,6 +1,11 @@
 import spacy
 from spacy.matcher import Matcher
 import json
+import speech_recognition as sr
+import pyttsx3
+
+# Initialize the recognizer
+r = sr.Recognizer()
 
 # Load the language model
 nlp = spacy.load('en_core_web_trf')
@@ -8,10 +13,14 @@ nlp = spacy.load('en_core_web_trf')
 # Load patterns file
 with open('./datasets/patterns.json', 'r') as f:
     patterns = json.load(f)
+    
+# Function to speak
+def speak(response):
+    engine = pyttsx3.init()
+    engine.say(response)
+    engine.runAndWait()
 
 # Define a function to extract relevant information from the user's command
-
-
 def extract_information(text):
     # Initialize the Matcher
     matcher = Matcher(nlp.vocab)

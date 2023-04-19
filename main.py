@@ -6,7 +6,7 @@ import json
 nlp = spacy.load('en_core_web_sm')
 
 # Load patterns file
-with open('/datasets/patterns.json', 'r') as f:
+with open('./datasets/patterns.json', 'r') as f:
     patterns = json.load(f)
 
 # Define a function to extract relevant information from the user's command

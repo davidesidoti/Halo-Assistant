@@ -1,0 +1,21 @@
+[{
+        "text": "what time is it?",
+        "intent": "time"
+    },
+    {
+        "text": "what's the time?",
+        "intent": "time"
+    },
+    {
+        "text": "tell me the time?",
+        "intent": "time"
+    },
+    {
+        "text": "how's the weather?",
+        "intent": "weather"
+    },
+    {
+        "text": "what's the weather?",
+        "intent": "weather"
+    }
+]

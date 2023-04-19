@@ -11,11 +11,87 @@
         "intent": "time"
     },
     {
-        "text": "how's the weather?",
+        "text": "do you have the time?",
+        "intent": "time"
+    },
+    {
+        "text": "what's the date today?",
+        "intent": "date"
+    },
+    {
+        "text": "what's today's date?",
+        "intent": "date"
+    },
+    {
+        "text": "what day is it today?",
+        "intent": "date"
+    },
+    {
+        "text": "what's the weather like?",
         "intent": "weather"
     },
     {
-        "text": "what's the weather?",
+        "text": "how's the weather outside?",
         "intent": "weather"
+    },
+    {
+        "text": "is it going to rain today?",
+        "intent": "weather"
+    },
+    {
+        "text": "what's the news today?",
+        "intent": "news"
+    },
+    {
+        "text": "tell me the latest news?",
+        "intent": "news"
+    },
+    {
+        "text": "what's happening in the world?",
+        "intent": "news"
+    },
+    {
+        "text": "can you recommend a restaurant?",
+        "intent": "restaurant"
+    },
+    {
+        "text": "what's a good restaurant nearby?",
+        "intent": "restaurant"
+    },
+    {
+        "text": "I want to eat something nice. Any recommendations?",
+        "intent": "restaurant"
+    },
+    {
+        "text": "can you book a table for me?",
+        "intent": "restaurant"
+    },
+    {
+        "text": "what's the meaning of life?",
+        "intent": "philosophy"
+    },
+    {
+        "text": "why are we here?",
+        "intent": "philosophy"
+    },
+    {
+        "text": "what is the purpose of existence?",
+        "intent": "philosophy"
+    },
+    {
+        "text": " why are we here?",
+        "intent": "philosophy"
+    },
+    {
+        "text": "why are we here ?",
+        "intent": "philosophy"
+    },
+    {
+        "text": "why are we here?",
+        "intent": "philosophy"
+    },
+    {
+        "text": "what's a good restaurant around me?",
+        "intent": "restaurant"
     }
 ]

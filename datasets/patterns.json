@@ -1,0 +1,31 @@
+{
+    "WEATHER_PATTERN": [{
+        "LOWER": "weather"
+    }],
+    "LOCATION_PATTERN": [{
+        "ENT_TYPE": "GPE"
+    }],
+    "LANDMARK_PATTERN": [{
+            "LOWER": {
+                "IN": [
+                    "where",
+                    "what"
+                ]
+            }
+        },
+        {
+            "LEMMA": "be"
+        },
+        {
+            "ENT_TYPE": "FAC"
+        }
+    ],
+    "REMIND_PATTERN": [{
+        "LOWER": {
+            "IN": [
+                "remind",
+                "remember"
+            ]
+        }
+    }]
+}

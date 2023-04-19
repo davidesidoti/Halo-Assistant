@@ -42,8 +42,16 @@ threshold = 0.6
 print(predicted_prob.max())
 
 if predicted_prob.max() < threshold:
-    # The prediction is uncertain
-    print("I'm sorry, I didn't understand that.")
+    # The prediction is uncertain and Halo asks for the user intent
+    print("Sorry, as an AI I'm still learning. Can you tell me what was your intent with the last sentence you said?")
+    # Add the new sentence and intent to the dataset
+    with open('./datasets/commands.json', 'w') as f:
+        new_entry = {
+            "text": str(input_sentence.lower().replace('halo', '')),
+            "intent": input('Intent: ')
+        }
+        dataset.append(new_entry)
+        json.dump(dataset, f)
 else:
     # The prediction is confident
     print(f"The intent is {predicted_intent}.")

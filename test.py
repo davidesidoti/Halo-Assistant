@@ -31,8 +31,19 @@ X = vectorizer.fit_transform([input_text] + texts)
 clf = LogisticRegression()
 clf.fit(X[1:], intent_labels)
 
+# Get prediction accuracy
+predicted_prob = clf.predict_proba(X[:1])[0]
+
 # Make a prediction on the input sentence
 predicted_intent = clf.predict(X[:1])[0]
 
-print(predicted_intent)
-# Output: 'time'
+# Define a threshold or confidence score below which the prediction is uncertain
+threshold = 0.6
+print(predicted_prob.max())
+
+if predicted_prob.max() < threshold:
+    # The prediction is uncertain
+    print("I'm sorry, I didn't understand that.")
+else:
+    # The prediction is confident
+    print(f"The intent is {predicted_intent}.")

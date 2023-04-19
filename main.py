@@ -3,7 +3,7 @@ from spacy.matcher import Matcher
 import json
 
 # Load the language model
-nlp = spacy.load('en_core_web_sm')
+nlp = spacy.load('en_core_web_trf')
 
 # Load patterns file
 with open('./datasets/patterns.json', 'r') as f:

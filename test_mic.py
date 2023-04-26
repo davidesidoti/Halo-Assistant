@@ -1,37 +1,28 @@
-# Python program to translate
-# speech to text and text to speech
+from neuralintents import GenericAssistant
 
 
-import speech_recognition as sr
-import pyttsx3
+def function_for_time():
+    print("You triggered the time intent!")
+    # Some action you want to take
 
-# Initialize the recognizer
-r = sr.Recognizer()
 
-# Function to convert text to
-# speech
-def SpeakText(command):
-	# Initialize the engine
-	engine = pyttsx3.init()
-	engine.say(command)
-	engine.runAndWait()
+mappings = {'time': function_for_time}
 
-# Loop infinitely for user to
-# speak
+assistant = GenericAssistant(
+    './datasets/intents.json', intent_methods=mappings, model_name="./models/nova_ai")
 
-while(1):
-    try:
-        with sr.Microphone() as source2:
-            # r.adjust_for_ambient_noise(source2, duration=0.2)
-            print('Speak now')
-            audio2 = r.listen(source2)
-            MyText = r.recognize_google(audio2)
-            MyText = MyText.lower()
-            print("Did you say ",MyText)
-            SpeakText(MyText)
-            
-    except sr.RequestError as e:
-        print("Could not request results; {0}".format(e))
-        
-    except sr.UnknownValueError:
-        print("unknown error occurred")
+try:
+    assistant.load_model()
+except:
+    assistant.train_model()
+    assistant.save_model()
+
+
+done = False
+
+while not done:
+    message = input("Enter a message: ")
+    if message == "STOP":
+        done = True
+    else:
+        print(assistant.request(message))

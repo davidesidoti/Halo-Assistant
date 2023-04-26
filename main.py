@@ -63,6 +63,10 @@ class NovaAI:
         self.run_assistant()
 
     def model_train(self):
+        """
+        This function performs self-training of a model, removes previous model files, trains the model,
+        saves the new model, and notifies the user when self-training is complete.
+        """
         self.speak("Starting self-training...")
         os.remove("./models/nova_ai.h5")
         os.remove("./models/nova_ai_classes.pkl")
@@ -106,6 +110,10 @@ class NovaAI:
         self.speak(response)
 
     def run_assistant(self):
+        """
+        This is a Python function for a coding assistant that uses speech recognition and text-to-speech
+        to respond to user input.
+        """
         done = False
         while not done:
             try:

@@ -45,9 +45,10 @@ class Nova:
             try:
                 with speech_recognition.Microphone() as mic:
                     print("Mic active.")
-                    self.recognizer.pause_threshold = 1
+                    self.recognizer.pause_threshold = 0.5
                     self.recognizer.adjust_for_ambient_noise(mic, duration=0.2)
                     audio = self.recognizer.listen(mic)
+                    print("audio captured")
 
                     text = self.recognizer.recognize_google(audio)
                     text = text.lower()
@@ -57,6 +58,7 @@ class Nova:
                     if "nova" in text:
                         print("nova activated. Speak now...")
                         audio = self.recognizer.listen(mic)
+                        print("audio captured after nova activated")
                         text = self.recognizer.recognize_google(audio)
                         text = text.lower()
                         if text == "stop":

@@ -153,4 +153,4 @@ class NovaAI:
                 continue
 
 
-NovaAI(False, False)
+NovaAI(True, True)

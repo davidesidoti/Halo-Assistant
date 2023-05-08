@@ -1,6 +1,10 @@
 import datetime
 import random
 import os
+import json
+from dotenv import load_dotenv
+
+import requests
 
 import speech_recognition
 import pyttsx3 as tts
@@ -14,8 +18,19 @@ class NovaAI:
     recognizer = None
     speaker = None
     assistant = None
+    openWeatherAPIKey = None
+    currentLatitude = None
+    currentLongitude = None
 
     def __init__(self, ttsActive: bool = True, sttActive: bool = True) -> None:
+        load_dotenv()
+        self.openWeatherAPIKey = os.getenv("OPEN_WEATHER_API_KEY")
+
+        currentIP = requests.get('https://ipinfo.io')
+        location = currentIP.json()['loc'].split(',')
+        self.currentLatitude = location[0]
+        self.currentLongitude = location[1]
+
         self.ttsActive = ttsActive
         self.sttActive = sttActive
 
@@ -44,7 +59,8 @@ class NovaAI:
         # Initiate the model
         methods_mapping = {
             "time": self.get_the_time,
-            "model_training": self.model_train
+            "model_training": self.model_train,
+            "weather_information": self.get_weather_information
         }
         self.assistant = GenericAssistant(
             "./datasets/intents.json", intent_methods=methods_mapping, model_name="./models/nova_ai")
@@ -109,6 +125,35 @@ class NovaAI:
         response = random.choice(responses).replace("%%", now)
         self.speak(response)
 
+    def get_weather_information(self):
+        """
+        This Python function generates a random response with the current weather information.
+        """
+        responses = [
+            "Let me check! In your location, the current temperature is [temperature], with [weather_description].",
+            "It looks like [weather_description] today, with temperatures around [temperature].",
+            "According to the latest forecast, it will be [weather_description] today, with temperatures in the range of [temperature].",
+            "It's [temperature] degrees outside right now, with [weather_description].",
+            "Based on the latest information, the temperature today will be [temperature], with [weather_description].",
+            "It's currently [temperature] degrees and [weather_description].",
+            "I'm seeing a forecast of [weather_description] for your location today, with temperatures around [temperature].",
+            "The temperature in your location today is expected to range from [temperature_min] to [temperature_max], with [weather_description].",
+            "According to the latest weather reports, it will be [weather_description] and [temperature] degrees in your location today.",
+            "The forecast for this week predicts [weather_description] with temperatures ranging from [temperature_min] to [temperature_max]."
+        ]
+
+        weather_response = requests.get(
+            f'https://api.openweathermap.org/data/2.5/weather?lat={self.currentLatitude}&lon={self.currentLongitude}&appid={self.openWeatherAPIKey}&units=metric')
+        weather_data = weather_response.json()
+        
+        response = random.choice(responses)
+        response = response.replace('[temperature]', str(weather_data['main']['temp']))
+        response = response.replace('[weather_description]', weather_data['weather'][0]['description'])
+        response = response.replace('[temperature_min]', str(weather_data['main']['temp_min']))
+        response = response.replace('[temperature_max]', str(weather_data['main']['temp_max']))
+        
+        self.speak(response)
+
     def run_assistant(self):
         """
         This is a Python function for a coding assistant that uses speech recognition and text-to-speech
@@ -153,4 +198,4 @@ class NovaAI:
                 continue
 
 
-NovaAI(True, True)
+NovaAI(False, False)

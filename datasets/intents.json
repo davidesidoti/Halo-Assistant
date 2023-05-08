@@ -114,6 +114,20 @@
                 "It's time to start model training"
             ],
             "responses": []
+        },
+        {
+            "tag": "weather_information",
+            "patterns": [
+                "What's the weather like today?",
+                "Is it going to rain today?",
+                "What's the forecast for today?",
+                "How hot is it outside?",
+                "What's the temperature today?",
+                "Do I need an umbrella today?",
+                "Is it cold outside?",
+                "What's the forecast for the week?"
+            ],
+            "responses": []
         }
     ]
 }
